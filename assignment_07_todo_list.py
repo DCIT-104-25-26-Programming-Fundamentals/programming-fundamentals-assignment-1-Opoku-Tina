@@ -79,3 +79,62 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
+def display_menu():
+    """Display the main menu."""
+    print("\n" + "=" * 30)
+    print("     TO-DO LIST MENU")
+    print("=" * 30)
+    print("1. Add task")
+    print("2. View tasks")
+    print("3. Delete task")
+    print("4. Quit")
+    print("=" * 30)
+
+def add_task(tasks):
+    """Add a task to the list."""
+    task = input("Enter task: ")
+    tasks.append(task)
+    print(f'Task added: "{task}"')
+
+def view_tasks(tasks):
+    """Display all tasks with their numbers."""
+    if not tasks:
+        print("\nYour to-do list is empty!")
+    else:
+        print("\nYour Tasks:")
+        for i, task in enumerate(tasks, 1):
+            print(f"{i}. {task}")
+
+def delete_task(tasks):
+    """Delete a task from the list."""
+    if not tasks:
+        print("\nNo tasks to delete!")
+        return
+    view_tasks(tasks)
+    try:
+        task_num = int(input("Enter task number to delete: "))
+        if 1 <= task_num <= len(tasks):
+            removed_task = tasks.pop(task_num - 1)
+            print(f'Task "{removed_task}" has been removed.')
+        else:
+            print("Invalid task number!")
+    except ValueError:
+        print("Please enter a valid number!")
+
+if __name__ == "__main__":
+    todo_list = []
+    
+    while True:
+        display_menu()
+        choice = input("Enter your choice (1-4): ")
+        if choice == "1":
+            add_task(todo_list)
+        elif choice == "2":
+            view_tasks(todo_list)
+        elif choice == "3":
+            delete_task(todo_list)
+        elif choice == "4":
+            print("\nGoodbye!")
+            break
+        else:
+            print("Invalid choice! Please enter 1-4.")
